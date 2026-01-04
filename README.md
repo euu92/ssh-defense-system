@@ -1,6 +1,6 @@
 # 🛡️ Homelab Security Architecture: Automated SSH Defense
 
-![Architecture Diagram](homelab-security-architecture.png)
+![Architecture Diagram](Homelab_Security_Architecture_Automated_SSH_Defense.excalidraw.png)
 
 ## 🏗️ Design Overview
 This repository documents the security architecture designed to protect my Homelab infrastructure against brute-force attacks. The goal is to create a closed-loop system that not only blocks threats but visualizes them in real-time.
