@@ -48,3 +48,25 @@ To deploy Hunter in your own environment, follow these steps:
 Copy the template and fill in your local paths:
 ```bash
 cp .env.example .env
+```
+### 3. Deployment
+Run the following commands to build and start the pipeline:
+```bash
+# Build and start containers in the background
+docker compose up -d --build
+
+# Verify services are running
+docker ps
+
+# Monitor logs in real-time
+docker compose logs -f parser
+```
+
+### 4. Viewing Results
+The interactive threat map will be generated and updated in real-time at:
+`data/map.html`
+
+---
+## 👨‍💻 About the Author
+2nd Year Software Engineering Student (GPA: 9.03/10).
+Focused on Low-level Systems, Cybersecurity, and Data Science.
