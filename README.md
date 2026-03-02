@@ -2,41 +2,49 @@
 
 ![Architecture Diagram](Homelab_Security_Architecture_Automated_SSH_Defense.excalidraw.png)
 
+![Status](https://img.shields.io/badge/Status-Completed-success)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Docker](https://img.shields.io/badge/Infrastructure-Docker-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+**Hunter** is a containerized security pipeline designed to protect Homelab infrastructure against brute-force attacks. It creates a closed-loop system that not only blocks threats using a Zero-Trust approach but also visualizes them in real-time.
+
 ## 🏗️ Design Overview
-This repository documents the security architecture designed to protect my Homelab infrastructure against brute-force attacks. The goal is to create a closed-loop system that not only blocks threats but visualizes them in real-time.
+This repository documents the security architecture designed to monitor and map global intrusion attempts against a Raspberry Pi-based **Homelab**. The system transforms raw `sshd` logs into an interactive geospatial dashboard.
 
 ### 🔄 The Architecture Logic
-1.  **Detection**: `sshd` logs authentication failures.
-2.  **Reaction**: Fail2Ban (configured with custom jails) triggers immediate temporary bans.
-3.  **Ingestion**: A Python service parses logs to extract IP addresses.
-4.  **Intelligence**: IPs are enriched with GeoLocation data (GeoLite2).
-5.  **Persistence**: Attack data is stored in a relational database (SQLite).
-6.  **Visualization**: A dashboard renders the threat map.
+1.  **Detection**: `sshd` logs authentication failures and connection events.
+2.  **Reaction**: Hardened SSH configuration (Key-based auth) and Fail2Ban integration.
+3.  **Ingestion**: Python service using `watchdog` for **event-driven** log parsing.
+4.  **Intelligence**: IP enrichment via GeoLite2 (MaxMind) for geolocation data.
+5.  **Persistence**: Attack telemetry stored in a **SQLite** relational database.
+6.  **Visualization**: Dynamic geospatial dashboard rendered via **Folium**.
 
 ---
 
-## 🚀 Project Status & Roadmap
-**Current Phase: Active Development / Implementation**
-
-I am currently implementing this architecture in my production environment.
-
-- [x] **Phase 1: Hardening** (Completed)
-    - SSH Configuration & Key-based Auth.
-    - Fail2Ban Jail configuration & Regex filtering.
-- [x] **Phase 2: Log Parsing** (Completed)
-    - Python script for real-time log ingestion.
-- [ ] **Phase 3: Data Persistence** (In Progress)
-    - SQLite Schema design.
-    - Script integration for database writes.
-- [ ] **Phase 4: Visualization** (Planned)
-    - Frontend dashboard for the threat map.
+## 🚀 Project Status
+- [x] **Phase 1: Hardening**: SSH Configuration & ED25519 Key-based Auth.
+- [x] **Phase 2: Log Parsing**: Real-time ingestion via `inotify` events.
+- [x] **Phase 3: Data Persistence**: Relational SQLite schema implemented.
+- [x] **Phase 4: Visualization**: Automated HTML map generation.
 
 ## 🛠️ Tech Stack
-* **Core**: Python 3, Bash
-* **Security**: Fail2Ban, IPTables
-* **Infrastructure**: Docker, Ubuntu Server
+* **Core**: Python 3.10, Bash
+* **Security**: Fail2Ban, IPTables (Zero-Trust)
+* **Infrastructure**: Docker & Docker Compose, Ubuntu Server
 
 ---
 
-### ⚠️ Note for Reviewers
-*> This repository currently hosts the design documentation. The source code will be pushed once the Persistence layer (Phase 3) passes internal testing in the Homelab.*
+## 💻 Setup & Execution
+
+To deploy Hunter in your own environment, follow these steps:
+
+### 1. Prerequisites
+* **Docker & Docker Compose** installed.
+* **MaxMind GeoLite2**: Download the `GeoLite2-City.mmdb` file from MaxMind and place it in the `data/` folder.
+* **Log Access**: Ensure the user has read permissions for `/var/log/auth.log`.
+
+### 2. Environment Configuration
+Copy the template and fill in your local paths:
+```bash
+cp .env.example .env
