@@ -46,7 +46,7 @@ def parse_logs():
                     timestamp = match.group("timestamp")
                     
                     try:
-                        # Validación de objeto IP
+                        # IP validation
                         ip_obj = ipaddress.ip_address(ip_raw)
                         ip_str = str(ip_obj)
 
@@ -117,4 +117,5 @@ if __name__ == "__main__":
             time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
+
     observer.join()
