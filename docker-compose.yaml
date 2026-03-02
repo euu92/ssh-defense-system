@@ -1,0 +1,21 @@
+services:
+  parser:
+    build: .
+    container_name: log_analyser
+    env_file: .env
+    command: python log_parser.py 
+    volumes:
+      - .:/app
+      - ${LOG_FILE}:${LOG_FILE}:ro
+    restart: unless-stopped
+
+  visualizer:
+    build: .
+    container_name: map_generator
+    env_file: .env
+    command: python map.py
+    depends_on:
+      - paser
+    volumes:
+      - .:/app
+    restart: unless-stopped

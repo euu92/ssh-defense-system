@@ -1,0 +1,6 @@
+pandas
+folium
+watchdog
+geoip2
+apscheduler
+python-dotenv

@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Env
+.env
+
+# DB & Map
+data/clean_data_sqlite.db
+data/*.html
+data/*.mmdb
+
+.vscode/
+
+# Docker logs
+*.log
